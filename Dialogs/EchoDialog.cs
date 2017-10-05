@@ -24,7 +24,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
             var message = await argument;
 
-            if (String.IsNullOrEmpty(message.Text)) {
+            if ("Switch to HBO".Equals(message.Text)) {
                 await context.PostAsync("Got it, switching TV channel to HBO..");
                 return;
             }
@@ -35,6 +35,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             await context.PostAsync(welcomeMessage);
 
             await this.DisplayOptionsAsync(context);
+            //context.Wait(MessageReceivedAsync);
 
         }
 
@@ -55,7 +56,12 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                     Text = "The seventh and final episode of the seventh season of Game of Thrones. It is the sixty-seventh episode of the series overall.",
                     Images = new List<CardImage> { new CardImage("http://i.lv3.hbo.com/assets/images/series/game-of-thrones/episodes/7/67/episode-67-300.jpg") },
                     Buttons = new List<CardAction> {
-                        new CardAction(ActionTypes.PostBack, "Watch"),
+                       new CardAction
+                        {
+                            Title = "Watch",
+                            Value = $"Switch to HBO",
+                            Type = ActionTypes.ImBack
+                        },
                         new CardAction(ActionTypes.OpenUrl, "Get Info", value: "http://www.hbo.com/game-of-thrones/episodes/7/67-67-episode/index.html")
                     }
                 }.ToAttachment());
@@ -69,12 +75,13 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                    Text = "It’s the beginning of a new era for the Red Wings, as they’ll play their first regular season game at Little Caesars Arena tonight.",
                    Images = new List<CardImage> { new CardImage("https://nbcprohockeytalk.files.wordpress.com/2017/10/659417388-e1507212969936.jpg?w=300&crop=1") },
                    Buttons = new List<CardAction> {
-                        new CardAction(ActionTypes.PostBack, "Set Reminder"),
+                        new CardAction(ActionTypes.ImBack, "Set Reminder"),
                         new CardAction(ActionTypes.OpenUrl, "Get Info", value: "http://nhl.nbcsports.com/2017/10/05/nhl-on-nbcsn-doubleheader-wild-vs-red-wings-flyers-vs-kings/")
                    }
                }.ToAttachment());
 
             await context.PostAsync(reply);
+
         }
     }
 }
