@@ -75,7 +75,12 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                    Text = "It’s the beginning of a new era for the Red Wings, as they’ll play their first regular season game at Little Caesars Arena tonight.",
                    Images = new List<CardImage> { new CardImage("https://nbcprohockeytalk.files.wordpress.com/2017/10/659417388-e1507212969936.jpg?w=300&crop=1") },
                    Buttons = new List<CardAction> {
-                        new CardAction(ActionTypes.ImBack, "Set Reminder"),
+                         new CardAction
+                        {
+                            Title = "Set Reminder",
+                            Value = "Set Reminder",
+                            Type = ActionTypes.ImBack
+                        },
                         new CardAction(ActionTypes.OpenUrl, "Get Info", value: "http://nhl.nbcsports.com/2017/10/05/nhl-on-nbcsn-doubleheader-wild-vs-red-wings-flyers-vs-kings/")
                    }
                }.ToAttachment());
