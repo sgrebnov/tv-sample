@@ -24,8 +24,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
 
             var message = await argument;
 
-            if ("Switch to HBO".Equals(message.Text)) {
-                await context.PostAsync("Got it, switching TV channel to HBO..");
+            if (message.Text != null && message.Text.Contains("Switch to HBO")) {
+                await context.PostAsync("Sure, switching TV channel to HBO..");
                 return;
             }
 
